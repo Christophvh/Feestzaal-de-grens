@@ -7,10 +7,10 @@
  * @package _tk
  */
 ?><!DOCTYPE html>
-<html <?php language_attributes(); ?>>
+<html itemscope="itemscope" itemtype="http://schema.org/Webpage" <?php language_attributes(); ?>>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 	<title><?php wp_title( '|', true, 'right' ); ?></title>
@@ -19,62 +19,64 @@
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 
 	<?php wp_head(); ?>
-  <!-- FONTS -->
-   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700,700italic">
-   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:400,300,500,600,700">
-
-   <!-- FANCYBOX -->
-   <link rel="stylesheet" href="/wp-content/themes/_tk/includes/css/fancybox/jquery.fancybox.css">
-   <!-- OWL Carousel -->
-   <link rel="stylesheet" href="/wp-content/themes/_tk/includes/css/owl-carousel/owl.carousel.css">
-  <link rel="stylesheet" href="/wp-content/themes/_tk/includes/css/owl-carousel/owl.transitions.css">
-   <!-- ANIMATIONS -->
-   <link rel="stylesheet" href="/wp-content/themes/_tk/includes/css/animations/animate.min.css">
-
+  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Radley:400,400italic' rel='stylesheet' type='text/css'>
 </head>
 
 <body <?php body_class(); ?>>
 	<?php do_action( 'before' ); ?>
+  <div class="sidebar-menu-container" id="sidebar-menu-container">
 
-<div id="main-container">
-  <!-- HEADER -->
-      <header id="header">
+		<div class="sidebar-menu-push">
 
-          <div class="container-fluid">
-              <div class="row">
-                  <div class="col-sm-3">
+			<div class="sidebar-menu-overlay"></div>
 
-                      <!-- LOGO -->
-          <div id="logo">
-            <a href="index.html">
-              <img src="assets/images/logo.png" alt="">
-            </a>
-          </div><!-- LOGO -->
+			<div class="sidebar-menu-inner">
+        <header class="site-header">
+      					<div class="top-header">
+      						<div class="inner-header clearfix">
+      							<div class="left-header">In placerat ultricies sapien et venenatis</div>
+      							<div class="right-header">
+      								<div class="social">
+      									<a href="#"><i class="fa fa-facebook"></i></a>
+      									<a href="#"><i class="fa fa-twitter"></i></a>
+      									<a href="#"><i class="fa fa-linkedin"></i></a>
+      									<a href="#"><i class="fa fa-google-plus"></i></a>
+      									<a href="#"><i class="fa fa-rss"></i></a>
+      								</div>
+      							</div>
+      						</div>
+      					</div>
+      					<div id="main-header" class="main-header header-sticky">
+      						<div class="inner-header clearfix">
+      							<div class="logo">
+      								<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><img class="logo-holder" src="assets/images/logo.png" alt="Artcore"></a>
+      							</div>
+      							<div class="header-right-toggle pull-right">
+      								<a href="javascript:void(0)" class="side-menu-button"><i class="fa fa-bars"></i></a>
+      							</div>
+      							<div class="search-menu-button pull-right hidden-sm hidden-xs">
+      								<a href="javascript:void(0)" class="search-link"><i class="fa fa-search"></i></a>
+      								<div class="search-wrap">
+      									<form method="get" class="search-form">
+      										<input type="text" placeholder="Search here" name="s" autocomplete="off">
+      									</form>
+      								</div>
+      							</div>
+      							<nav class="main-navigation pull-right hidden-xs hidden-sm">
+                      <!-- The WordPress Menu goes here -->
+                      <?php wp_nav_menu(
+                        array(
+                          'theme_location' 	=> 'primary',
+                          'menu_class' 		=> 'nav navbar-nav',
+                          'fallback_cb' 		=> 'wp_bootstrap_navwalker::fallback',
+                          'menu_id'			=> 'main-menu',
+                          'walker' 			=> new wp_bootstrap_navwalker()
+                        )
+                      ); ?>
 
-                  </div><!-- col -->
-                  <div class="col-sm-9">
-
-          <!-- MENU -->
-                      <nav>
-                          <a id="mobile-menu-button" href="#"><i class="oslo-icon-menu55"></i></a>
-
-                            <!-- The WordPress Menu goes here -->
-                  					<?php wp_nav_menu(
-                  						array(
-                  							'theme_location' 	=> 'primary',
-                                'container'         => '<li>',
-                  							'container_class'   => 'dropdown',
-                  							'menu_class' 		=> 'menu clearfix',
-                  							'fallback_cb' 		=> 'wp_bootstrap_navwalker::fallback',
-                  							'menu_id'			=> 'menu',
-                  							'walker' 			=> new wp_bootstrap_navwalker()
-                  						)
-                  					); ?>
-
-                      </nav>
-
-                  </div><!-- col -->
-              </div><!-- row -->
-          </div><!-- container-fluid -->
-
-      </header><!-- HEADER -->
+      							</nav>
+      						</div>
+      					</div>
+      				</header>
