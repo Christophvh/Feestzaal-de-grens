@@ -1,11 +1,9 @@
 <?php get_header() ?>
 
 <div class="slider">
-        <div class="fullwidthbanner-container">
-          <div class="fullwidthbanner">
-            <?php do_shortcode(['[rev_slider alias="home-business"]']) ?>
-          </div>
-        </div>
+
+            <?php echo do_shortcode('[rev_slider alias="homepage"]'); ?>
+
       </div>
 
       <section class="call-to-action">
@@ -14,10 +12,10 @@
             <div class="col-sm-12">
               <div class="cta-inner clearfix">
                 <div class="cta-text">
-                  <h5 class="cta-title">Conducting a full measured survey of an existing building</h5>
+                  <h5 class="cta-title">Stig zal hier zotte slagzinnen zetten en mensen zullen reservern!</h5>
                 </div>
                 <div class="cta-button">
-                  <a href="#" class="btn btn-bordered">Get the Quote</a>
+                  <a href="#" class="btn btn-bordered">Hier is het te doen!</a>
                 </div>
               </div>
             </div>

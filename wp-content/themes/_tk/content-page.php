@@ -5,23 +5,25 @@
  * @package _tk
  */
 ?>
-
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header>
-		<h1 class="page-title"><?php the_title(); ?></h1>
-	</header><!-- .entry-header -->
-
-	<div class="entry-content">
-		<div class="entry-content-thumbnail">
-			<?php the_post_thumbnail(); ?>
-		</div>
-		<?php the_content(); ?>
-		<?php
-			wp_link_pages( array(
-				'before' => '<div class="page-links">' . __( 'Pages:', '_tk' ),
-				'after'  => '</div>',
-			) );
-		?>
-	</div><!-- .entry-content -->
-	<?php edit_post_link( __( 'Edit', '_tk' ), '<footer class="entry-meta"><span class="edit-link">', '</span></footer>' ); ?>
-</article><!-- #post-## -->
+<section id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+        <div class="container">
+          <div class="row section-header">
+            <div class="col-sm-12 text-center">
+              <h3><?php the_title(); ?></h3>
+                <p><?php the_field('subtitle'); ?></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <?php the_content(); ?>
+              <?php
+                wp_link_pages( array(
+                  'before' => '<div class="page-links">' . __( 'Pages:', '_tk' ),
+                  'after'  => '</div>',
+                ) );
+              ?>
+              <?php edit_post_link( __( 'Edit', '_tk' ), '<span class="edit-link">', '</span>' ); ?>
+            </div>
+          </div>
+        </div>
+</section>

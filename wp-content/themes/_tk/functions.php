@@ -36,6 +36,7 @@ function _tk_setup() {
 	 * @link http://codex.wordpress.org/Function_Reference/add_theme_support#Post_Thumbnails
 	*/
 	add_theme_support( 'post-thumbnails' );
+  add_image_size( 'blog-img', 1200,650 , array('center', 'center'));
 
 	/**
 	 * Enable support for Post Formats
@@ -62,7 +63,7 @@ function _tk_setup() {
 	 * This theme uses wp_nav_menu() in one location.
 	*/
 	register_nav_menus( array(
-		'primary'  => __( 'Header bottom menu', '_tk' ),
+		'primary'  => __( 'Main menu', '_tk' ),
 	) );
 
 }
@@ -81,8 +82,19 @@ function _tk_widgets_init() {
 		'before_title'  => '<h3 class="widget-title">',
 		'after_title'   => '</h3>',
 	) );
+
+  register_sidebar( array(
+    'name'          => __( 'Footer', '_tk' ),
+    'id'            => 'footer_1',
+    'before_widget' => '<div class="col-md-3 col-sm-6 widget">',
+    'after_widget'  => '</div><div class="spacer"></div>',
+    'before_title'  => '<h4 class="widget-title">',
+    'after_title'   => '</h4>',
+  ) );
+
 }
 add_action( 'widgets_init', '_tk_widgets_init' );
+
 
 /**
  * Enqueue scripts and styles

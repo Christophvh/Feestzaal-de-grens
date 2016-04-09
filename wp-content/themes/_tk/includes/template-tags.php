@@ -36,8 +36,8 @@ function _tk_content_nav( $nav_id ) {
 
 		<?php if ( is_single() ) : // navigation links for single posts ?>
 
-			<?php previous_post_link( '<li class="nav-previous previous">%link</li>', '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', '_tk' ) . '</span> %title' ); ?>
-			<?php next_post_link( '<li class="nav-next next">%link</li>', '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', '_tk' ) . '</span>' ); ?>
+			<?php previous_post_link( '<div class="nav-previous">%link</div>', '' . _x( '', 'Previous post link', '_tk' ) . '%title' ); ?>
+			<?php next_post_link( '<div class="nav-next">%link</div>', '%title' . _x( '', 'Next post link', '_tk' ) . '' ); ?>
 
 		<?php elseif ( $wp_query->max_num_pages > 1 && ( is_home() || is_archive() || is_search() ) ) : // navigation links for home, archive, and search pages ?>
 
