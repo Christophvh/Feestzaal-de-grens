@@ -37,6 +37,9 @@ function _tk_setup() {
 	*/
 	add_theme_support( 'post-thumbnails' );
   add_image_size( 'blog-img', 1200,650 , array('center', 'center'));
+  add_image_size( 'home-blog', 800, 532, array('center', 'center'));
+  add_image_size('avatar' , 100,100, array('center','center'));
+  add_image_size('home-feest', 700, 440, array('center', 'center'));
 
 	/**
 	 * Enable support for Post Formats

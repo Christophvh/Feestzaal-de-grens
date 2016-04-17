@@ -36,14 +36,15 @@
         <header class="site-header">
       					<div class="top-header">
       						<div class="inner-header clearfix">
-      							<div class="left-header">In placerat ultricies sapien et venenatis</div>
+      							<div class="left-header">
+                      <i class="fa fa-map-marker" aria-hidden="true"></i> Bredabaan 58  2990 Wuustwezel
+                      <i class="fa fa-phone" aria-hidden="true"></i> +32(0)476 49 79 30
+                      <i class="fa fa-envelope-o" aria-hidden="true"></i> feestzaaldegrens@promis-events.be
+                    </div>
       							<div class="right-header">
       								<div class="social">
-      									<a href="#"><i class="fa fa-facebook"></i></a>
-      									<a href="#"><i class="fa fa-twitter"></i></a>
-      									<a href="#"><i class="fa fa-linkedin"></i></a>
-      									<a href="#"><i class="fa fa-google-plus"></i></a>
-      									<a href="#"><i class="fa fa-rss"></i></a>
+      									<a href="https://www.facebook.com/feestzaaldegrens/"><i class="fa fa-facebook"></i></a>
+      									<a href="https://plus.google.com/107773458694078560816/about"><i class="fa fa-google-plus"></i></a>
       								</div>
       							</div>
       						</div>

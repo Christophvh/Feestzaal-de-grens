@@ -52,8 +52,8 @@
         <div class="container">
           <div class="row section-header">
             <div class="col-sm-12 text-center">
-              <h3>recent projects</h3>
-              <p>Odd future photo booth flannel ethnic pug, occupy keffiyeh</p>
+              <h3>De Feestzaal</h3>
+              <p>Enkele foto's van in en rond de feestzaal</p>
             </div>
           </div>
         </div>
@@ -169,34 +169,49 @@
       </section>
 
       <section class="parallax-section" style="background-color: #888;">
-        <div class="parallax-image" data-stellar-background-ratio="0.5" style="background-image: url('http://placehold.it/1900x1400/')"></div>
+        <div class="parallax-image" data-stellar-background-ratio="0.5" style="background-image: url('wp-content/themes/_tk/includes/img/bg-testimonial.jpg')"></div>
         <div class="parallax-inner">
           <div class="container">
             <div class="row section-header">
               <div class="col-sm-12 text-center">
-                <h3>Testimonials</h3>
+                <h3>Wat zeggen onze klanten ?</h3>
               </div>
             </div>
             <div class="row">
               <div class="col-sm-12 text-center">
                 <div class="flexslider carousel testimonials">
                   <ul class="slides">
-                    <li class="testimonial-item">
-                      <p>Meggings shabby chic keffiyeh fap, pour-over farm-to-table mumblecore try-hard. Squid try-hard bitters, photo booth chia meggings cold-pressed health goth pickled typewriter.</p>
-                      <div class="testimonial-author"><strong>Maria Gray</strong>, CEO at Envato</div>
-                    </li>
-                    <li class="testimonial-item">
-                      <p>Street art American Apparel farm-to-table butcher vinyl literally, DIY Intelligentsia banh mi flexitarian. Kitsch roof party wayfarers Pinterest Echo Park Etsy yr Austin meh sartorial mustache.</p>
-                      <div class="testimonial-author"><strong>Owen Carlton</strong>, Architect</div>
-                    </li>
-                    <li class="testimonial-item">
-                      <p>Messenger bag Carles migas biodiesel, Neutra dreamcatcher seitan fap High Life Intelligentsia Portland McSweeney's. PBR tattooed Williamsburg Bushwick umami mixtape.</p>
-                      <div class="testimonial-author"><strong>John Smith</strong>, Founder</div>
-                    </li>
-                    <li class="testimonial-item">
-                      <p>Street art American Apparel farm-to-table butcher vinyl literally, DIY Intelligentsia banh mi flexitarian. Kitsch roof party wayfarers Pinterest Echo Park Etsy yr Austin meh sartorial mustache.</p>
-                      <div class="testimonial-author"><strong>Daniel Hill</strong>, Photographer</div>
-                    </li>
+                  <?php
+                      $args = array (
+                      'post_type' => 'testimonial',
+                      'post_status' => 'publish',
+                    );
+                      $the_query = new WP_Query( $args ); ?>
+
+                      <?php if ( $the_query->have_posts() ) : ?>
+                      	<!-- pagination here -->
+                      	<!-- the loop -->
+                      	<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
+                          <li class="testimonial-item">
+                            <p><?php the_content(); ?></p>
+                           <div class="testimonial-author"><strong><?php the_title(); ?> - </strong>
+                           <?php (the_field('functie')) ?  the_field('functie') : ""; ?></div>
+                           <div class="avatar">
+                             <?php if ( has_post_thumbnail() ): ?>
+                             <?php the_post_thumbnail('avatar'); ?>
+                             <?php else: ?>
+                               <img src="http://placehold.it/100x100/" title="<?php the_title(); ?>" alt="avatar">
+                             <?php endif; ?>
+                           </div>
+                          </li>
+                      	<?php endwhile; ?>
+                      	<!-- end of the loop -->
+                      	<!-- pagination here -->
+                      	<?php wp_reset_postdata(); ?>
+
+                      <?php else : ?>
+                      	<p><?php _e( 'Sorry, geen testimonials gevonden.' ); ?></p>
+                      <?php endif; ?>
                   </ul>
                 </div>
               </div>
@@ -214,54 +229,53 @@
             </div>
           </div>
           <div class="blog-isotope row">
+            <?php
+            $args = array(
+              'post_type' => 'post',
+              'post_status' => 'publish',
+              'posts_per_page' => 3,
+            );
+            $the_query = new WP_Query( $args ); ?>
+
+            <?php if ( $the_query->have_posts() ) : ?>
+
+            	<!-- pagination here -->
+
+            	<!-- the loop -->
+            	<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
+            		<h2></h2>
             <article class="blog-post col-md-4 col-sm-6">
               <h5 class="blog-title">
-                <a href="#">
+                <a href="<?php the_permalink(); ?>">
                   <span class="blog-thumb">
-                    <img src="http://placehold.it/800x532/" alt="">
+                    <?php if ( has_post_thumbnail() ): ?>
+                    <?php the_post_thumbnail('home-blog'); ?>
+                    <?php else: ?>
+                      <img src="http://placehold.it/800x532/" title="<?php the_title_attribute(); ?>" alt="<?php the_alt_attribute(); ?>">
+                    <?php endif; ?>
                     <span class="hover"></span>
                   </span>
-                  <span class="blog-title-inner">artisan High Life</span>
+                  <span class="blog-title-inner"><?php the_title(); ?></span>
                 </a>
               </h5>
               <div class="entry-content">
-                <span class="blog-meta">Traveling, September 25, 2014</span>
-                <p>Retro Carles letterpress fap messenger bag Wes Anderson. Blog seitan Bushwick, heirloom Odd Future mustache.</p>
-                <p><a href="#" class="read-more">Continue Reading</a></p>
+                <span class="blog-meta"><?php the_category( ',' ); ?> , <?php the_time( get_option( 'date_format' ) ); ?></span>
+                <p><?php the_excerpt(); ?></p>
+                <p>
+                  <a href="<?php the_permalink(); ?>" class="read-more">Lees Meer ..</a>
+                </p>
               </div>
             </article>
-            <article class="blog-post col-md-4 col-sm-6">
-              <h5 class="blog-title">
-                <a href="#">
-                  <span class="blog-thumb">
-                    <img src="http://placehold.it/800x532/" alt="">
-                    <span class="hover"></span>
-                  </span>
-                  <span class="blog-title-inner">Letterpress: The quinoa</span>
-                </a>
-              </h5>
-              <div class="entry-content">
-                <span class="blog-meta">Nature, September 25, 2014</span>
-                <p>Retro Carles letterpress fap messenger bag Wes Anderson. Blog seitan Bushwick, heirloom Odd Future mustache.</p>
-                <p><a href="#" class="read-more">Continue Reading</a></p>
-              </div>
-            </article>
-            <article class="blog-post col-md-4 col-sm-6">
-              <h5 class="blog-title">
-                <a href="#">
-                  <span class="blog-thumb">
-                    <img src="http://placehold.it/800x532/" alt="">
-                    <span class="hover"></span>
-                  </span>
-                  <span class="blog-title-inner">Flannel street art</span>
-                </a>
-              </h5>
-              <div class="entry-content">
-                <span class="blog-meta">Fashion, September 25, 2014</span>
-                <p>Retro Carles letterpress fap messenger bag Wes Anderson. Blog seitan Bushwick, heirloom Odd Future mustache.</p>
-                <p><a href="#" class="read-more">Continue Reading</a></p>
-              </div>
-            </article>
+          <?php endwhile; ?>
+          <!-- end of the loop -->
+
+          <!-- pagination here -->
+
+          <?php wp_reset_postdata(); ?>
+
+        <?php else : ?>
+          <p><?php _e( 'Sorry, er geen berichten gevonden' ); ?></p>
+        <?php endif; ?>
           </div>
         </div>
       </section>

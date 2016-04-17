@@ -2,7 +2,11 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 <div class="blog-post">
   <div class="post-thumb">
-    <img src="http://placehold.it/1200x650/" alt="">
+      <?php if ( has_post_thumbnail() ): ?>
+      <?php the_post_thumbnail('blog-img'); ?>
+      <?php else: ?>
+        <img src="http://placehold.it/1200x650/" alt="<?php the_title(); ?>">
+      <?php endif; ?>
   </div>
   <div class="post-content clearfix">
     <div class="post-date">
