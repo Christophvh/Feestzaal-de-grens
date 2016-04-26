@@ -26,143 +26,68 @@
  					<div class="container">
  						<div class="row section-header">
  							<div class="col-sm-12 text-center">
- 								<h3>Projects 3 Columns Boxed</h3>
- 								<p>Odd future photo booth flannel ethnic keffiyeh</p>
+                <h3><?php the_title(); ?></h3>
+                  <p><?php the_field('subtitle'); ?></p>
  							</div>
  							<div class="col-sm-12 text-center">
  								<div id="projects-filter">
- 									<a href="#" data-filter="*" class="active">Show All</a>
- 									<a href="#" data-filter=".furniture">Furniture</a>
- 									<a href="#" data-filter=".wallpaper">Wallpaper</a>
- 									<a href="#" data-filter=".nature">Nature</a>
- 									<a href="#" data-filter=".branding">Branding</a>
+                  <?php $terms = get_terms( array(
+                    'taxonomy' => 'feestzaal_categorie',
+                ) );?>
+
+ 									<a href="#" data-filter="*" class="active">Toon Alles</a>
+                  <?php foreach ($terms as $term): ?>
+                    	<a href="#" data-filter=".<?php echo $term->name ?>"><?php echo $term->name ?></a>
+                  <?php endforeach; ?>
  								</div>
  							</div>
  						</div>
  					</div>
  					<div class="container">
- 						<div class="row" id="projects-grid">
- 							<div class="col-md-4 col-sm-6 project-item wallpaper">
- 								<article class="project-post">
- 									<a href="#" class="project-link">
- 										<div class="project-overlay"></div>
- 										<div class="project-hover">
- 											<h5 class="project-title">Semper ut dolor</h5>
- 											<p class="project-category">Wallpaper</p>
- 										</div>
- 										<div class="image-placeholder">
- 											<img src="http://placehold.it/700x440/" alt="">
- 										</div>
- 									</a>
- 								</article>
- 							</div>
- 							<div class="col-md-4 col-sm-6 project-item nature wallpaper">
- 								<article class="project-post">
- 									<a href="#" class="project-link">
- 										<div class="project-overlay"></div>
- 										<div class="project-hover">
- 											<h5 class="project-title">Penthouse Honk Kong</h5>
- 											<p class="project-category">Nature / Wallpaper</p>
- 										</div>
- 										<div class="image-placeholder">
- 											<img src="http://placehold.it/700x440/" alt="">
- 										</div>
- 									</a>
- 								</article>
- 							</div>
- 							<div class="col-md-4 col-sm-6 project-item furniture wallpaper">
- 								<article class="project-post">
- 									<a href="#" class="project-link">
- 										<div class="project-overlay"></div>
- 										<div class="project-hover">
- 											<h5 class="project-title">Malesuada fames ac</h5>
- 											<p class="project-category">Furniture</p>
- 										</div>
- 										<div class="image-placeholder">
- 											<img src="http://placehold.it/700x440/" alt="">
- 										</div>
- 									</a>
- 								</article>
- 							</div>
- 							<div class="col-md-4 col-sm-6 project-item branding nature wallpaper">
- 								<article class="project-post">
- 									<a href="#" class="project-link">
- 										<div class="project-overlay"></div>
- 										<div class="project-hover">
- 											<h5 class="project-title">Consequat nisi</h5>
- 											<p class="project-category">Furniture</p>
- 										</div>
- 										<div class="image-placeholder">
- 											<img src="http://placehold.it/700x440/" alt="">
- 										</div>
- 									</a>
- 								</article>
- 							</div>
- 							<div class="col-md-4 col-sm-6 project-item branding furniture">
- 								<article class="project-post">
- 									<a href="#" class="project-link">
- 										<div class="project-overlay"></div>
- 										<div class="project-hover">
- 											<h5 class="project-title">Wooden Furniture</h5>
- 											<p class="project-category">Furniture</p>
- 										</div>
- 										<div class="image-placeholder">
- 											<img src="http://placehold.it/700x440/" alt="">
- 										</div>
- 									</a>
- 								</article>
- 							</div>
- 							<div class="col-md-4 col-sm-6 project-item furniture nature">
- 								<article class="project-post">
- 									<a href="#" class="project-link">
- 										<div class="project-overlay"></div>
- 										<div class="project-hover">
- 											<h5 class="project-title">Sudney Opera House</h5>
- 											<p class="project-category">Furniture</p>
- 										</div>
- 										<div class="image-placeholder">
- 											<img src="http://placehold.it/700x440/" alt="">
- 										</div>
- 									</a>
- 								</article>
- 							</div>
- 							<div class="col-md-4 col-sm-6 project-item branding">
- 								<article class="project-post">
- 									<a href="#" class="project-link">
- 										<div class="project-overlay"></div>
- 										<div class="project-hover">
- 											<h5 class="project-title">Convallis interdum</h5>
- 											<p class="project-category">Furniture</p>
- 										</div>
- 										<div class="image-placeholder">
- 											<img src="http://placehold.it/700x440/" alt="">
- 										</div>
- 									</a>
- 								</article>
- 							</div>
- 							<div class="col-md-4 col-sm-6 project-item furniture">
- 								<article class="project-post">
- 									<a href="#" class="project-link">
- 										<div class="project-overlay"></div>
- 										<div class="project-hover">
- 											<h5 class="project-title">Living Room</h5>
- 											<p class="project-category">Furniture</p>
- 										</div>
- 										<div class="image-placeholder">
- 											<img src="http://placehold.it/700x440/" alt="">
- 										</div>
- 									</a>
- 								</article>
- 							</div>
- 						</div>
- 					</div>
- 					<div class="container">
- 						<div class="spacer"></div>
- 						<div class="row">
- 							<div class="col-sm-12 text-center">
- 								<a href="#" class="btn btn-default">Load More</a>
- 							</div>
+           <div class="row" id="projects-grid">
+            <?php
+                $args = array(
+                  'post_type' => 'de_zaal',
+                  'post_status' => 'publish',
+                  'posts_per_page' => -1,
+                );
+                $the_query = new WP_Query( $args ); ?>
 
+                <?php if ( $the_query->have_posts() ) : ?>
+
+                	<!-- pagination here -->
+
+                	<!-- the loop -->
+                	<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
+                    <?php $tax = get_the_terms( $post->ID, 'feestzaal_categorie' );
+                      foreach ($tax as $category) {
+                      $categories = $category->name;
+                      }?>
+
+                    <div class="col-md-4 col-sm-6 project-item <?php echo $categories ?>">
+                      <article class="project-post">
+                        <a href="<?php the_permalink(); ?>" class="project-link">
+                          <div class="project-overlay"></div>
+                          <div class="project-hover">
+                            <h5 class="project-title"><?php the_title(); ?></h5>
+                            <p class="project-category"><?php echo $categories ?></p>
+                          </div>
+                          <div class="image-placeholder">
+                            <?php if ( has_post_thumbnail() ): ?>
+                            <a href="<?php the_permalink(); ?>" title="the_title();"><?php the_post_thumbnail('feestzaal'); ?></a>
+                            <?php endif; ?>
+                          </div>
+                        </a>
+                      </article>
+                    </div>
+                	<?php endwhile; ?>
+                	<!-- end of the loop -->
+
+                	<?php wp_reset_postdata(); ?>
+
+                <?php else : ?>
+                	<p><?php _e( 'Sorry, geen feestzaal-items gevonden.' ); ?></p>
+                <?php endif; ?>
  						</div>
  					</div>
  				</section>

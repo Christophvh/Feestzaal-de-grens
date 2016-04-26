@@ -1,22 +1,13 @@
 <?php
-/**
- * The template for displaying Archive pages.
- *
- * Learn more: http://codex.wordpress.org/Template_Hierarchy
- *
- * @package _tk
- */
 
 get_header(); ?>
 
-	<?php // add the class "panel" below here to wrap the content-padder in Bootstrap style ;) ?>
-	<div class="content-padder">
+<section class="latest-news">
+  <div class="container">
 
-		<?php if ( have_posts() ) : ?>
-
-			<header>
-				<h1 class="page-title">
-					<?php
+    <div class="row section-header">
+      <div class="col-sm-12 text-center">
+        <h3>	<?php
 						if ( is_category() ) :
 							single_cat_title();
 
@@ -28,7 +19,7 @@ get_header(); ?>
 							 * what author we're dealing with (if that is the case).
 							*/
 							the_post();
-							printf( __( 'Author: %s', '_tk' ), '<span class="vcard">' . get_the_author() . '</span>' );
+							printf( __( 'Auteur: %s', '_tk' ), '<span class="vcard">' . get_the_author() . '</span>' );
 							/* Since we called the_post() above, we need to
 							 * rewind the loop back to the beginning that way
 							 * we can run the loop properly, in full.
@@ -36,13 +27,13 @@ get_header(); ?>
 							rewind_posts();
 
 						elseif ( is_day() ) :
-							printf( __( 'Day: %s', '_tk' ), '<span>' . get_the_date() . '</span>' );
+							printf( __( 'Dag: %s', '_tk' ), '<span>' . get_the_date() . '</span>' );
 
 						elseif ( is_month() ) :
-							printf( __( 'Month: %s', '_tk' ), '<span>' . get_the_date( 'F Y' ) . '</span>' );
+							printf( __( 'Maand: %s', '_tk' ), '<span>' . get_the_date( 'F Y' ) . '</span>' );
 
 						elseif ( is_year() ) :
-							printf( __( 'Year: %s', '_tk' ), '<span>' . get_the_date( 'Y' ) . '</span>' );
+							printf( __( 'Jaar: %s', '_tk' ), '<span>' . get_the_date( 'Y' ) . '</span>' );
 
 						elseif ( is_tax( 'post_format', 'post-format-aside' ) ) :
 							_e( 'Asides', '_tk' );
@@ -60,42 +51,85 @@ get_header(); ?>
 							_e( 'Links', '_tk' );
 
 						else :
-							_e( 'Archives', '_tk' );
+							_e( 'Archief', '_tk' );
 
 						endif;
-					?>
-				</h1>
-				<?php
-					// Show an optional term description.
-					$term_description = term_description();
-					if ( ! empty( $term_description ) ) :
-						printf( '<div class="taxonomy-description">%s</div>', $term_description );
-					endif;
-				?>
-			</header><!-- .page-header -->
+					?></h3>
+          <p>	<?php
+    					// Show an optional term description.
+    					$term_description = term_description();
+    					if ( ! empty( $term_description ) ) :
+    						printf( $term_description );
+    					endif;
+    				?></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8 blog-classic">
+            <?php if ( have_posts() ) : ?>
+      	<!-- pagination here -->
 
-			<?php /* Start the Loop */ ?>
-			<?php while ( have_posts() ) : the_post(); ?>
+      	<!-- the loop -->
+        <?php while ( have_posts() ) : the_post(); ?>
+          <div class="blog-post">
+            <div class="post-thumb">
+              <a href="<?php the_permalink() ?>" title="<?php the_title_attribute(); ?>">
+                <?php if ( has_post_thumbnail() ): ?>
+                <?php the_post_thumbnail('blog-img'); ?>
+                <?php else: ?>
+                  <img src="http://placehold.it/1200x650/" alt="<?php the_title(); ?>">
+                <?php endif; ?>
+              </a>
+            </div>
+            <div class="post-content clearfix">
+              <div class="post-date">
+                  <span class="day"><?php the_time('d'); ?> </span>
+                  <span class="month"><?php the_time('M'); ?></span>
+              </div>
+              <div class="right">
+                <div class="post-header">
+                  <h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                  <span class="post-meta"><?php the_category( ',' ); ?> ,
+                    <?php the_time( get_option( 'date_format' ) ); ?>
+                    <span class="taglist pull-right">
+                    <?php $tags = get_the_tag_list( '  #', __( '  #', '_tk' ));
+                      if($tags){
+                        echo $tags;
+                      }
+                     ?>
+                     </span>
+                  </span>
+                </div>
+                <p><?php the_excerpt(); ?></p>
+                <p>
+                  <a href="<?php the_permalink(); ?>" class="read-more">Lees Meer ..</a>
+                </p>
+              </div>
+            </div>
+          </div>
 
-				<?php
-					/* Include the Post-Format-specific template for the content.
-					 * If you want to overload this in a child theme then include a file
-					 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-					 */
-					get_template_part( 'content', get_post_format() );
-				?>
 
-			<?php endwhile; ?>
+        <div class="spacer"></div>
+      <?php endwhile; ?>
+      <div class="row">
+    		<div class="col-sm-12">
+    			<hr>
+    			<div class="nav-links clearfix">
+    				<?php _tk_content_nav( 'nav-below' ); ?>
+    			</div>
+    		</div>
+    		</div>
+    <?php else : ?>
 
-			<?php _tk_content_nav( 'nav-below' ); ?>
+      <?php get_template_part( 'no-results', 'archive' ); ?>
 
-		<?php else : ?>
+    <?php endif; ?>
 
-			<?php get_template_part( 'no-results', 'archive' ); ?>
-
-		<?php endif; ?>
-
-	</div><!-- .content-padder -->
-
-<?php get_sidebar(); ?>
+      </div>
+      <div id="sidebar" class="col-md-4">
+       <?php get_sidebar() ?>
+      </div>
+    </div>
+  </div>
+</section>
 <?php get_footer(); ?>

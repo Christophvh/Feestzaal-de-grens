@@ -220,7 +220,7 @@ nav.responsive-menu ul li .sub-menu a,
 a.side-menu-button,
 nav.main-navigation ul a,
 nav.responsive-menu a,
-footer .footer-widgets .widget .subscribe-form .subscribe-submit,
+footer .footer-widgets .widget .mc4wp-form-1672 .subscribe-submit,
 .blog-classic .blog-post .post-date span,
 .read-more,
 .nav-links a,
@@ -282,6 +282,7 @@ a {
 }
 a:hover {
   color: inherit;
+  text-decoration:none;
 }
 hr {
   border-color: #dddddd;
@@ -516,6 +517,10 @@ nav.main-navigation ul li:hover ul.sub-menu {
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
+
+nav.main-navigation ul a:hover {
+  background-color:transparent !important;
+}
 nav.main-navigation ul a {
   font-size: 13px;
   letter-spacing: 1px;
@@ -689,6 +694,7 @@ footer a:focus {
 footer a:hover,
 footer a:focus:hover {
   color: #c2c2c2;
+  text-decoration: none;
 }
 footer .footer-widgets {
   padding-top: 80px;
@@ -708,33 +714,33 @@ footer .footer-widgets .widget .widget-title {
   color: #fff;
   margin: 0 0 25px 0;
 }
-footer .footer-widgets .widget .footer-list {
+footer .footer-widgets .widget ul {
   padding: 0;
   margin: 0;
   list-style: none;
 }
-footer .footer-widgets .widget .footer-list li {
+footer .footer-widgets .widget ul li {
   margin-bottom: 2px;
   display: block;
 }
-footer .footer-widgets .widget .footer-list li:before {
+footer .footer-widgets .widget ul li:before {
   font-size: 10px;
   font-family: 'FontAwesome';
   content: '\f0a9';
   display: inline-block;
   margin-right: 7px;
 }
-footer .footer-widgets .widget .subscribe-form {
+footer .footer-widgets .widget .mc4wp-form-1672 {
   position: relative;
   margin-top: 20px;
 }
-footer .footer-widgets .widget .subscribe-form .subscribe-field {
+footer .footer-widgets .widget .mc4wp-form-1672 .subscribe-field {
   background: #313131;
   border: none;
   padding: 10px;
   width: 100%;
 }
-footer .footer-widgets .widget .subscribe-form .subscribe-submit {
+footer .footer-widgets .widget .mc4wp-form-1672 .subscribe-submit {
   position: absolute;
   top: 0;
   right: 0;
@@ -2128,6 +2134,17 @@ html[xmlns] .flexslider .slides {
   }
 }
 
+@media screen and (max-width: 768px) {
+  .left-header i {
+    margin-left:10px !important;
+
+  }
+
+  .right-header{
+    display:none;
+  }
+}
+
 .left-header i {
   color:#d2a508;
   margin-left: 50px;
@@ -2150,4 +2167,17 @@ html[xmlns] .flexslider .slides {
     -moz-border-radius: 50%;
     border-radius: 50%;
     border: 5px solid rgba(255,255,255,0.5);
+}
+
+.front-icon {
+  color:#d2a508;
+}
+
+.keypoints {
+  font-size: 16px;
+  text-transform: none;
+}
+
+.taglist {
+  color:#d2a508;
 }

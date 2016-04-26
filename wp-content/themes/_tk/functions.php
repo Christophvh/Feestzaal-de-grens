@@ -38,13 +38,12 @@ function _tk_setup() {
 	add_theme_support( 'post-thumbnails' );
   add_image_size( 'blog-img', 1200,650 , array('center', 'center'));
   add_image_size( 'home-blog', 800, 532, array('center', 'center'));
+  add_image_size( 'single-zaal', 850, 500, array('center', 'center'));
   add_image_size('avatar' , 100,100, array('center','center'));
-  add_image_size('home-feest', 700, 440, array('center', 'center'));
+  add_image_size('feestzaal', 700, 440, array('center', 'center'));
+  add_image_size ('feestzaal-gallery', 600,600 , array('center', 'center'));
 
-	/**
-	 * Enable support for Post Formats
-	*/
-	add_theme_support( 'post-formats', array( 'aside', 'image', 'video', 'quote', 'link' ) );
+
 
 	/**
 	 * Setup the WordPress core custom background feature.
@@ -97,6 +96,19 @@ function _tk_widgets_init() {
 
 }
 add_action( 'widgets_init', '_tk_widgets_init' );
+
+function posts_link_next_class($format){
+     $format = str_replace('href=', 'class="btn btn-default" href=', $format);
+     return $format;
+}
+add_filter('next_post_link', 'posts_link_next_class');
+
+function posts_link_prev_class($format) {
+     $format = str_replace('href=', 'class="btn btn-default" href=', $format);
+     return $format;
+}
+add_filter('previous_post_link', 'posts_link_prev_class');
+
 
 
 /**
@@ -161,10 +173,6 @@ require get_template_directory() . '/includes/extras.php';
  */
 require get_template_directory() . '/includes/customizer.php';
 
-/**
- * Load Jetpack compatibility file.
- */
-require get_template_directory() . '/includes/jetpack.php';
 
 /**
  * Load custom WordPress nav walker.

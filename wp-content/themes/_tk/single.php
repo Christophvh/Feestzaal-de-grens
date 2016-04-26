@@ -24,10 +24,11 @@ get_header(); ?>
     <div class="row">
       <div class="col-sm-12">
         <hr>
-        <div class="nav-links clearfix">
-          <?php _tk_content_nav( 'nav-below' ); ?>
+        <div class="project-nav hidden-xs">
+            <?php previous_post_link( '<div class="project-prev">%link</div>', '' . _x( '', 'Previous post link', '_tk' ) . '<i class="fa fa-angle-left"></i> %title' ); ?>
+
+              <?php next_post_link( '<div class="project-next">%link</div>', '%title <i class="fa fa-angle-right"></i>' . _x( '', 'Next post link', '_tk' ) . '' ); ?>
         </div>
-        <hr>
       </div>
     </div>
 

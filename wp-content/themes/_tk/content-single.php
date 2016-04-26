@@ -16,7 +16,17 @@
     <div class="right post-formatting">
       <div class="post-header">
         <h3 class="post-title"><?php the_title(); ?></h3>
-        <span class="post-meta"><?php the_category( ',' ); ?> , <?php the_time( get_option( 'date_format' ) ); ?></span>
+        <span class="post-meta">
+          <?php the_category( ',' ); ?> ,
+          <?php the_time( get_option( 'date_format' ) ); ?>
+          <span class="taglist pull-right">
+          <?php $tags = get_the_tag_list( '  #', __( '  #', '_tk' ));
+            if($tags){
+              echo $tags;
+            }
+           ?>
+           </span>
+        </span>
       </div>
       <p><?php the_content(); ?></p>
     </div>

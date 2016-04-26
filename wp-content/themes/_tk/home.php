@@ -11,9 +11,12 @@
     <div class="row">
       <div class="col-md-8 blog-classic">
       <?php
+      $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
       $args = array(
         'post_type' => 'post',
         'post_status' => 'publish',
+        'posts_per_page' => 3,
+        'paged'          => $paged
       );
       $the_query = new WP_Query( $args ); ?>
 
@@ -41,7 +44,16 @@
               <div class="right">
                 <div class="post-header">
                   <h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                  <span class="post-meta"><?php the_category( ',' ); ?> , <?php the_time( get_option( 'date_format' ) ); ?></span>
+                  <span class="post-meta"><?php the_category( ',' ); ?> ,
+                    <?php the_time( get_option( 'date_format' ) ); ?>
+                    <span class="taglist pull-right">
+                    <?php $tags = get_the_tag_list( '  #', __( '  #', '_tk' ));
+                      if($tags){
+                        echo $tags;
+                      }
+                     ?>
+                     </span>
+                  </span>
                 </div>
                 <p><?php the_excerpt(); ?></p>
                 <p>
@@ -54,6 +66,26 @@
       	<!-- end of the loop -->
 
       	<!-- pagination here -->
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="nav-links clearfix">
+              <div class="nav-next">
+                <?php
+             $big = 999999999;
+             echo paginate_links( array(
+               'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+               'current' => max( 1, get_query_var('paged') ),
+               'total' => $the_query->max_num_pages,
+               'format' => '/page/%#%',
+               'prev_text' => '« Vorige',
+               'next_text' => 'Volgende »',
+             ) );
+             ?>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="spacer"></div>
 
       	<?php wp_reset_postdata(); ?>
 
@@ -61,19 +93,7 @@
       	<p><?php _e( 'Sorry, Geen berichten gevonden.' ); ?></p>
       <?php endif; ?>
 
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="nav-links clearfix">
-              <div class="nav-previous">
-                <a href="#">Older Posts</a>
-              </div>
-              <div class="nav-next">
-                <a href="#">Newer Posts</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="spacer"></div>
+
       </div>
       <div id="sidebar" class="col-md-4">
        <?php get_sidebar() ?>

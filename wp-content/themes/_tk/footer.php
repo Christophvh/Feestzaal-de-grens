@@ -21,7 +21,7 @@
   <div class="footer-copyright">
     <div class="container">
       <div class="row">
-        <div class="col-sm-12">&copy; <?php echo date('Y'); ?> Feestzaal De Grens, All Rights Reserved</div>
+        <div class="col-sm-12">&copy; <?php echo date('Y'); ?> Feestzaal De Grens, Alle rechten voorbehouden</div>
       </div>
     </div>
   </div>
@@ -41,7 +41,6 @@
         <?php wp_nav_menu(
           array(
             'theme_location' 	=> 'primary',
-            'menu_class' 		=> 'nav navbar-nav',
             'fallback_cb' 		=> 'wp_bootstrap_navwalker::fallback',
             'menu_id'			=> 'main-menu',
             'walker' 			=> new wp_bootstrap_navwalker()

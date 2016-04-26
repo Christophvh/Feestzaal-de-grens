@@ -12,10 +12,10 @@
             <div class="col-sm-12">
               <div class="cta-inner clearfix">
                 <div class="cta-text">
-                  <h5 class="cta-title">Stig zal hier zotte slagzinnen zetten en mensen zullen reservern!</h5>
+                  <h5 class="cta-title"><?php the_field('cta_description') ?></h5>
                 </div>
                 <div class="cta-button">
-                  <a href="#" class="btn btn-bordered">Hier is het te doen!</a>
+                  <a href="<?php the_field('link') ?>" class="btn btn-bordered"><?php the_field('knoptekst') ?></a>
                 </div>
               </div>
             </div>
@@ -26,22 +26,17 @@
       <section class="services">
         <div class="container">
           <div class="row">
-            <div class="col-md-4 text-center service-post">
-              <span class="service-icon icon-equalizer"></span>
-              <h5 class="service-title">Building Surveys</h5>
-              <p>Odd future photo booth flannel ethnic pug, occupy keffiyeh synth blue bottle tofu tonx iphone. Blue bottle 90’s vice trust fund.</p>
+            <div class="col-md-5 col-sm-5">
+              <div class="single-image">
+                <img src="/wp-content/themes/_tk/includes/img/info.jpg" alt="Buitenkant De Grens">
+              </div>
               <div class="spacer"></div>
             </div>
-            <div class="col-md-4 text-center service-post">
-              <span class="service-icon icon-picture"></span>
-              <h5 class="service-title">Architecture Design</h5>
-              <p>Odd future photo booth flannel ethnic pug, occupy keffiyeh synth blue bottle tofu tonx iphone. Blue bottle 90’s vice trust fund.</p>
-              <div class="spacer"></div>
-            </div>
-            <div class="col-md-4 text-center service-post">
-              <span class="service-icon icon-layers"></span>
-              <h5 class="service-title">Building Contracts</h5>
-              <p>Odd future photo booth flannel ethnic pug, occupy keffiyeh synth blue bottle tofu tonx iphone. Blue bottle 90’s vice trust fund.</p>
+            <div class="col-md-7 col-sm-7">
+              <p>
+                <?php the_content(); ?>
+              </p>
+              	<?php edit_post_link( __( 'Edit', '_tk' ), '<span class="edit-link">', '</span>' ); ?>
               <div class="spacer"></div>
             </div>
           </div>
@@ -52,60 +47,52 @@
         <div class="container">
           <div class="row section-header">
             <div class="col-sm-12 text-center">
-              <h3>De Feestzaal</h3>
-              <p>Enkele foto's van in en rond de feestzaal</p>
+              <h3><?php echo get_the_title(1657);?></h3>
             </div>
           </div>
         </div>
         <div class="projects-holder clearfix">
-          <article class="project-post">
-            <a href="#" class="project-link">
-              <div class="project-overlay"></div>
-              <div class="project-hover">
-                <h5 class="project-title">Semper ut dolor</h5>
-                <p class="project-category">Furniture</p>
-              </div>
-              <div class="image-placeholder">
-                <img src="http://placehold.it/700x440/" alt="">
-              </div>
-            </a>
-          </article>
-          <article class="project-post">
-            <a href="#" class="project-link">
-              <div class="project-overlay"></div>
-              <div class="project-hover">
-                <h5 class="project-title">Convallis interdum</h5>
-                <p class="project-category">Furniture</p>
-              </div>
-              <div class="image-placeholder">
-                <img src="http://placehold.it/700x440/" alt="">
-              </div>
-            </a>
-          </article>
-          <article class="project-post">
-            <a href="#" class="project-link">
-              <div class="project-overlay"></div>
-              <div class="project-hover">
-                <h5 class="project-title">Malesuada fames ac</h5>
-                <p class="project-category">Furniture</p>
-              </div>
-              <div class="image-placeholder">
-                <img src="http://placehold.it/700x440/" alt="">
-              </div>
-            </a>
-          </article>
-          <article class="project-post">
-            <a href="#" class="project-link">
-              <div class="project-overlay"></div>
-              <div class="project-hover">
-                <h5 class="project-title">Consequat nisi</h5>
-                <p class="project-category">Furniture</p>
-              </div>
-              <div class="image-placeholder">
-                <img src="http://placehold.it/700x440/" alt="">
-              </div>
-            </a>
-          </article>
+          <?php
+              $args = array(
+                'post_type' => 'de_zaal',
+                'post_status' => 'publish',
+                'posts_per_page' => 4,
+              );
+              $the_query = new WP_Query( $args ); ?>
+
+              <?php if ( $the_query->have_posts() ) : ?>
+
+
+              	<!-- the loop -->
+              	<?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
+                  <?php $tax = get_the_terms( $post->ID, 'feestzaal_categorie' );
+                    foreach ($tax as $category) {
+                    $categories = $category->name;
+                    }?>
+                  <article class="project-post">
+                    <a href="<?php the_permalink(); ?>" class="project-link">
+                      <div class="project-overlay"></div>
+                      <div class="project-hover">
+                        <h5 class="project-title"><?php the_title(); ?></h5>
+                        <p class="project-category"><?php echo $categories ?></p>
+                      </div>
+                      <div class="image-placeholder">
+                        <?php if ( has_post_thumbnail() ): ?>
+                        <?php the_post_thumbnail('feestzaal'); ?>
+                        <?php endif; ?>
+                      </div>
+                    </a>
+                  </article>
+              	<?php endwhile; ?>
+              	<!-- end of the loop -->
+
+              	<!-- pagination here -->
+
+              	<?php wp_reset_postdata(); ?>
+
+              <?php else : ?>
+              	<p><?php _e( 'Sorry, geen berichten gevonden' ); ?></p>
+              <?php endif; ?>
         </div>
       </section>
 
@@ -113,58 +100,68 @@
         <div class="container">
           <div class="row section-header">
             <div class="col-sm-12 text-center">
-              <h3>Why choose Artcore</h3>
+              <h3>Onze Troeven</h3>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-6">
+            <div class="row">
               <div class="row">
-                <div class="col-md-4 col-sm-4">
-                  <div class="single-image">
-                    <img src="assets/images/files/ideas.jpg" alt="">
-                  </div>
-                  <div class="spacer"></div>
+                <div class="col-sm-3">
+                  <h5 class="service-title keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Karaktervolle moderne zaal met geschiedenis</h5>
                 </div>
-                <div class="col-md-8 col-sm-8">
-                  <p>Kickstarter migas quinoa, cray Vice yr crucifix leggings Carles cardigan 90's Wes <a href="#">Anderson chambray tote</a> bag. Narwhal vegan you probably haven't heard of them, mixtape tofu scenester ennui next level. Normcore vinyl chambray, hashtag readymade synth squid crucifix meh.</p>
-                  <div class="spacer"></div>
+                <div class="col-sm-3">
+                    <h5 class="service-title  keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Terras</h5>
                 </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="progress-wrapper">
-                <div class="progress-text">
-                  <span class="left">plugin development</span>
-                  <span class="right">48%</span>
+                <div class="col-sm-3">
+                    <h5 class="service-title  keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Veranda</h5>
                 </div>
-                <div class="progress">
-                   <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:48%">
-                    </div>
+                <div class="col-sm-3">
+                    <h5 class="service-title  keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Moderne inkleding</h5>
                 </div>
               </div>
-              <div class="progress-wrapper">
-                <div class="progress-text">
-                  <span class="left">web hosting</span>
-                  <span class="right">83%</span>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h5 class="service-title  keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Bier van de tap</h5>
                 </div>
-                <div class="progress">
-                   <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:83%">
-                    </div>
+                <div class="col-sm-3">
+                    <h5 class="service-title  keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Heel ruime parking</h5>
+                </div>
+                <div class="col-sm-3">
+                    <h5 class="service-title  keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Moderne keuken volgens restaurant normen</h5>
+                </div>
+                <div class="col-sm-3">
+                    <h5 class="service-title  keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Menu naar keuze</h5>
                 </div>
               </div>
-              <div class="progress-wrapper">
-                <div class="progress-text">
-                  <span class="left">html coding</span>
-                  <span class="right">76%</span>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h5 class="service-title  keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Rokersruimte</h5>
                 </div>
-                <div class="progress">
-                   <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:76%">
-                    </div>
+                <div class="col-sm-3">
+                    <h5 class="service-title  keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Kidscorner</h5>
+                </div>
+                <div class="col-sm-3">
+                    <h5 class="service-title  keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Topteam met ervaring</h5>
+                </div>
+                <div class="col-sm-3">
+                  <h5 class="service-title keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Professioneel licht &amp; geluid</h5>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h5 class="service-title keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Verjaardagen van 16 - 50</h5>
+                </div>
+                <div class="col-sm-3">
+                    <h5 class="service-title keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Trouw</h5>
+                </div>
+                <div class="col-sm-3">
+                    <h5 class="service-title keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Personeelsfeesten</h5>
+                </div>
+                <div class="col-sm-3">
+                    <h5 class="service-title keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Bedrijfs events</h5>
                 </div>
               </div>
               <div class="spacer"></div>
             </div>
-          </div>
         </div>
       </section>
 
@@ -196,7 +193,7 @@
                             <p><?php the_content(); ?></p>
                            <div class="testimonial-author"><strong><?php the_title(); ?> - </strong>
                            <?php (the_field('functie')) ?  the_field('functie') : ""; ?></div>
-                           <div class="avatar">
+                           <div class="avatar hidden-xs">
                              <?php if ( has_post_thumbnail() ): ?>
                              <?php the_post_thumbnail('avatar'); ?>
                              <?php else: ?>
@@ -224,8 +221,7 @@
         <div class="container">
           <div class="row section-header">
             <div class="col-sm-12 text-center">
-              <h3>Latest News</h3>
-              <p>Odd future photo booth flannel ethnic pug, occupy keffiyeh</p>
+              <h3><?php echo get_the_title(1611);?></h3>
             </div>
           </div>
           <div class="blog-isotope row">
