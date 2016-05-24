@@ -42,6 +42,7 @@ function _tk_setup() {
   add_image_size('avatar' , 100,100, array('center','center'));
   add_image_size('feestzaal', 700, 440, array('center', 'center'));
   add_image_size ('feestzaal-gallery', 600,600 , array('center', 'center'));
+  add_image_size('teamleden', 640,640, array('center', 'center'));
 
 
 
@@ -109,7 +110,24 @@ function posts_link_prev_class($format) {
 }
 add_filter('previous_post_link', 'posts_link_prev_class');
 
+function my_login_logo() { ?>
+    <style type="text/css">
+        #login h1 a, .login h1 a {
+            background-image: url(<?php echo get_stylesheet_directory_uri(); ?>/includes/img/stigo.png);
+        }
+    </style>
+<?php }
+add_action( 'login_enqueue_scripts', 'my_login_logo' );
 
+function my_login_logo_url() {
+    return '//www.stigo.be';
+}
+add_filter( 'login_headerurl', 'my_login_logo_url' );
+
+function my_login_logo_url_title() {
+    return 'Stigo';
+}
+add_filter( 'login_headertitle', 'my_login_logo_url_title' );
 
 /**
  * Enqueue scripts and styles

@@ -6,6 +6,7 @@
 
       </div>
 
+<?php if(get_field('link') && get_field('cta_description') && get_field('knoptekst')) :?>
       <section class="call-to-action">
         <div class="container">
           <div class="row">
@@ -22,13 +23,16 @@
           </div>
         </div>
       </section>
+    <?php endif; ?>
 
       <section class="services">
         <div class="container">
           <div class="row">
             <div class="col-md-5 col-sm-5">
               <div class="single-image">
-                <img src="/wp-content/themes/_tk/includes/img/info.jpg" alt="Buitenkant De Grens">
+                <?php if ( has_post_thumbnail() ): ?>
+                <?php the_post_thumbnail('blog-img'); ?>
+                <?php endif; ?>
               </div>
               <div class="spacer"></div>
             </div>
@@ -104,61 +108,29 @@
             </div>
           </div>
             <div class="row">
-              <div class="row">
-                <div class="col-sm-3">
-                  <h5 class="service-title keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Karaktervolle moderne zaal met geschiedenis</h5>
-                </div>
-                <div class="col-sm-3">
-                    <h5 class="service-title  keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Terras</h5>
-                </div>
-                <div class="col-sm-3">
-                    <h5 class="service-title  keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Veranda</h5>
-                </div>
-                <div class="col-sm-3">
-                    <h5 class="service-title  keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Moderne inkleding</h5>
-                </div>
+              <div class="col-sm-6">
+
+
+                    <?php if( have_rows('Troeven') ):  ?>
+
+
+                      <?php  while ( have_rows('Troeven') ) : the_row(); ?>
+
+                              <h5 class="service-title keypoints">
+                                <i class="fa fa-check-circle-o front-icon" aria-hidden="true"></i> <?php the_sub_field('troef');  ?></h5>
+
+
+                        <?php endwhile; ?>
+
+                    <?php else : ?>
+
+                      <p>Geen troeven gevonden!</p>
+
+                    <?php endif; ?>
+                    <?php edit_post_link( __( 'Edit', '_tk' ), '<span class="edit-link">', '</span>' ); ?>
               </div>
-              <div class="row">
-                <div class="col-sm-3">
-                  <h5 class="service-title  keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Bier van de tap</h5>
-                </div>
-                <div class="col-sm-3">
-                    <h5 class="service-title  keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Heel ruime parking</h5>
-                </div>
-                <div class="col-sm-3">
-                    <h5 class="service-title  keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Moderne keuken volgens restaurant normen</h5>
-                </div>
-                <div class="col-sm-3">
-                    <h5 class="service-title  keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Menu naar keuze</h5>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-3">
-                  <h5 class="service-title  keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Rokersruimte</h5>
-                </div>
-                <div class="col-sm-3">
-                    <h5 class="service-title  keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Kidscorner</h5>
-                </div>
-                <div class="col-sm-3">
-                    <h5 class="service-title  keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Topteam met ervaring</h5>
-                </div>
-                <div class="col-sm-3">
-                  <h5 class="service-title keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Professioneel licht &amp; geluid</h5>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-3">
-                  <h5 class="service-title keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Verjaardagen van 16 - 50</h5>
-                </div>
-                <div class="col-sm-3">
-                    <h5 class="service-title keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Trouw</h5>
-                </div>
-                <div class="col-sm-3">
-                    <h5 class="service-title keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Personeelsfeesten</h5>
-                </div>
-                <div class="col-sm-3">
-                    <h5 class="service-title keypoints"><i class="fa fa-check front-icon" aria-hidden="true"></i> Bedrijfs events</h5>
-                </div>
+              <div class="col-sm-6">
+                Afbeelding met nog een inschrijvingsveld
               </div>
               <div class="spacer"></div>
             </div>
@@ -260,8 +232,10 @@
                 <p>
                   <a href="<?php the_permalink(); ?>" class="read-more">Lees Meer ..</a>
                 </p>
+                  <?php edit_post_link( __( 'Edit', '_tk' ), '<hr><span class="edit-link">', '</span>' ); ?>
               </div>
             </article>
+
           <?php endwhile; ?>
           <!-- end of the loop -->
 
@@ -275,5 +249,163 @@
           </div>
         </div>
       </section>
+
+      <section class="full-width" style="background-color: #f2f2f2;">
+        <div class="container">
+          <div class="row section-header">
+            <div class="col-sm-12 text-center">
+              <h3>Het Team</h3>
+            </div>
+          </div>
+          <div class="row">
+            <?php
+                $args = array (
+                'post_type'       => 'teamleden',
+                'post_status'     => 'publish',
+                'posts_per_page'  => '3'
+              );
+                $the_query = new WP_Query( $args ); ?>
+           <?php if ( $the_query->have_posts() ) : ?>
+           <?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
+            <div class="col-md-4 col-sm-6">
+              <div class="team-item">
+                <div class="team-thumb">
+                  <?php if ( has_post_thumbnail() ): ?>
+                  <?php the_post_thumbnail('teamleden'); ?>
+                  <?php endif; ?>
+                  <div class="hover">
+                    <a href="<?php the_field('facebook'); ?>"><i class="fa fa-facebook"></i></a>
+                    <a href="<?php the_field('linkedin'); ?>"><i class="fa fa-linkedin"></i></a>
+                  </div>
+                  <div class="overlay"></div>
+                </div>
+                <div class="team-content">
+                  <span class="role"><?php the_field('functie'); ?></span>
+                  <h5><?php the_title(); ?></h5>
+                  <p><?php the_content(); ?></p>
+                  <p><?php edit_post_link( __( 'Edit', '_tk' ), '<span class="edit-link">', '</span>' ); ?></p>
+                </div>
+              </div>
+            </div>
+          <?php endwhile; ?>
+          <!-- end of the loop -->
+          <!-- pagination here -->
+          <?php wp_reset_postdata(); ?>
+
+        <?php else : ?>
+          <p><?php _e( 'Sorry, geen teamleden gevonden.' ); ?></p>
+        <?php endif; ?>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <a href="/over-ons" class="btn btn-accent">Bekijk het volledige team</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="services">
+        <div class="container">
+          <div class="row section-header">
+            <div class="col-sm-12 text-center">
+              <h3><?php the_field('titel'); ?></h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-5 col-sm-5">
+              <div class="single-image">
+                <?php
+                  $image = get_field('afbeelding');
+
+                  if( !empty($image) ): ?>
+
+                  	<img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
+
+                  <?php endif; ?>
+              </div>
+              <div class="spacer"></div>
+            </div>
+            <div class="col-md-7 col-sm-7">
+              <p>
+              <?php the_field('korte_tekst'); ?>
+              <div class="star-ratings-css">
+                <div class="star-ratings-css-top" style="width: <?php the_field('rating')?>%"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+              </div>
+              </p>
+
+              <div class="spacer"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="full-width" style="background-color: #f2f2f2;">
+        <div class="container">
+          <div class="row section-header">
+            <div class="col-sm-12 text-center">
+              <h3>Pakketten aangepast aan uw wensen</h3>
+            </div>
+          </div>
+          <div class="row">
+               <div class="col-md-3 col-sm-6 col-xs-12 float-shadow">
+                   <div class="price_table_container">
+                       <div class="price_table_heading">Starter</div>
+                       <div class="price_table_body">
+                           <div class="price_table_row cost warning-text"><strong>€ 10</strong></div>
+                           <div class="price_table_row">Eten</div>
+                           <div class="price_table_row">Drinken</div>
+                           <div class="price_table_row">Iets op maat</div>
+                           <div class="price_table_row">Nog iets</div>
+                       </div>
+                       <a href="/controleer-beschikbaarheid/" class="btn btn-warning btn-lg btn-block">Controleer Beschikbaarheid</a>
+                   </div>
+               </div>
+
+               <div class="col-md-3 col-sm-6 col-xs-12 float-shadow">
+                   <div class="price_table_container">
+                       <div class="price_table_heading">Basic</div>
+                       <div class="price_table_body">
+                           <div class="price_table_row cost primary-text"><strong>€ 29</strong></div>
+                           <div class="price_table_row">Eten</div>
+                           <div class="price_table_row">Drinken</div>
+                           <div class="price_table_row">Iets op maat</div>
+                           <div class="price_table_row">Nog iets</div>
+                       </div>
+                       <a href="/controleer-beschikbaarheid/" class="btn btn-primary btn-lg btn-block">Controleer Beschikbaarheid</a>
+                   </div>
+               </div>
+
+               <div class="col-md-3 col-sm-6 col-xs-12 float-shadow">
+                 <div class="recommended"><strong><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Meest Populair!</strong></div>
+                   <div class="price_table_container">
+                       <div class="price_table_heading">Premium</div>
+                       <div class="price_table_body">
+                           <div class="price_table_row cost success-bg"><strong>€ 39</strong></div>
+                           <div class="price_table_row">Eten</div>
+                           <div class="price_table_row">Drinken</div>
+                           <div class="price_table_row">Iets op maat</div>
+                           <div class="price_table_row">Nog iets</div>
+                       </div>
+                       <a href="/controleer-beschikbaarheid/" class="btn btn-success btn-lg btn-block">Controleer Beschikbaarheid</a>
+                   </div>
+               </div>
+
+               <div class="col-md-3 col-sm-6 col-xs-12 float-shadow">
+                   <div class="price_table_container">
+                       <div class="price_table_heading">Master</div>
+                        <div class="price_table_row cost success-bg"><strong>€ 39</strong></div>
+                       <div class="price_table_body">
+                         <div class="price_table_row">Eten</div>
+                         <div class="price_table_row">Drinken</div>
+                         <div class="price_table_row">Iets op maat</div>
+                         <div class="price_table_row">Nog iets</div>
+                       </div>
+                       <a href="/controleer-beschikbaarheid/" class="btn btn-info btn-lg btn-block">Controleer Beschikbaarheid</a>
+                   </div>
+               </div>
+           </div>
+       </div>
+     </section>
 
 <?php get_footer() ?>

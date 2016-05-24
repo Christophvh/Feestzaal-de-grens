@@ -21,7 +21,10 @@
   <div class="footer-copyright">
     <div class="container">
       <div class="row">
-        <div class="col-sm-12">&copy; <?php echo date('Y'); ?> Feestzaal De Grens, Alle rechten voorbehouden</div>
+        <div class="col-sm-10">&copy; <?php echo date('Y'); ?> Feestzaal De Grens, Alle rechten voorbehouden</div>
+        <div class="col-sm-2">
+          <a href="//www.stigo.be" title="Website Stigo"><img src="/wp-content/themes/_tk/includes/img/stigo-light.png" alt="stigo"  width="50" class="img-responsive"/></a>
+        </div>
       </div>
     </div>
   </div>
@@ -57,5 +60,26 @@
 <?php wp_footer(); ?>
 <script src="/wp-content/themes/_tk/includes/js/custom.min.js" type="text/javascript"></script>
 <script src="/wp-content/themes/_tk/includes/js/plugins.min.js" type="text/javascript"></script>
+<!-- Google Map -->
+   <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+   <script src="/wp-content/themes/_tk/includes/js/jquery.gmap3.min.js"></script>
+
+   <!-- Google Map Init-->
+   <script type="text/javascript">
+       jQuery(function($){
+           $('.contact-map').gmap3({
+               marker:{
+                   address: '51.42197,4.62071'
+               },
+                   map:{
+                   options:{
+                   zoom: 15,
+                   scrollwheel: false,
+                   streetViewControl : true
+                   }
+               }
+           });
+       });
+   </script>
 </body>
 </html>

@@ -1,12 +1,10 @@
 /********************************************
  * REVOLUTION 5.0 EXTENSION - VIDEO FUNCTIONS
- * @version: 1.0.9 (21.09.2015)
+ * @version: 1.1.2 (10.11.2015)
  * @requires jquery.themepunch.revolution.js
  * @author ThemePunch
 *********************************************/
-
 (function($) {
-
 var _R = jQuery.fn.revolution,
 	_ISM = _R.is_mobile();
 
@@ -151,6 +149,8 @@ jQuery.extend(true,_R, {
 			break;
 			case "html5":
 				if (_ISM && _nc.data('disablevideoonmobile')==1) return false;			
+
+
 				var jvideo = _nc.find('video'),
 					video = jvideo[0],
 					html5vid = jvideo.parent();
@@ -186,10 +186,12 @@ jQuery.extend(true,_R, {
 		var ifr = nextcaption.find('iframe, video'),
 			wa = asprat.split(':')[0],
 			ha = asprat.split(':')[1],
-			od = opt.width/opt.height,															
+			li = nextcaption.closest('.tp-revslider-slidesli'),
+			od = li.width()/li.height(),
 			vd = wa/ha,
 			nvh = (od/vd)*100,
-			nvw = (vd/od)*100;					
+			nvw = (vd/od)*100;	
+		
 		if (od>vd) 																
 			punchgs.TweenLite.to(ifr,0.001,{height:nvh+"%", width:"100%", top:-(nvh-100)/2+"%",left:"0px",position:"absolute"});
 		else 
@@ -340,8 +342,8 @@ jQuery.extend(true,_R, {
 
 			case "vimeo":
 				if (location.protocol === 'https:')
-					httpprefix = "https";				
-				_nc.data('videomarkup','<iframe style="visible:hidden" src="'+httpprefix+'://player.vimeo.com/video/'+vimeoid+'?'+vida+'" width="100%" height="100%" style="100%;height:100%"></iframe>');
+					httpprefix = "https";												
+				_nc.data('videomarkup','<iframe style="visible:hidden" src="'+httpprefix+'://player.vimeo.com/video/'+vimeoid+'?'+vida+'" webkitallowfullscreen mozallowfullscreen allowfullscreen width="100%" height="100%" style="100%;height:100%"></iframe>');
 			break;
 		}
 		
@@ -425,13 +427,21 @@ var addVideoListener = function(_nc,opt,startnow) {
 	loop = loop =="loop" ||  loop =="loopandnoslidestop";
 
 	// CARE ABOUT ASPECT RATIO
+
 	if (_nc.data('forcecover')==1) {
 		_nc.removeClass("fullscreenvideo").addClass("coverscreenvideo");			
 		var asprat = _nc.data('aspectratio');														
 		if (asprat!=undefined && asprat.split(":").length>1) 			
 			_R.prepareCoveredVideo(asprat,opt,_nc);
-
 	}
+	
+	if (_nc.data('bgvideo')==1) {
+		var asprat = _nc.data('aspectratio');														
+		if (asprat!=undefined && asprat.split(":").length>1) 			
+			_R.prepareCoveredVideo(asprat,opt,_nc);
+	}
+
+
 
 	// IF LISTENER DOES NOT EXIST YET			
 	ifr.attr('id',frameID);		
@@ -684,16 +694,16 @@ var htmlvideoevents = function(_nc,opt,startnow) {
 	}
 
 	// PRESET FULLCOVER VIDEOS ON DEMAND
-	if (_nc.data('forcecover')==1 || _nc.hasClass('fullscreenvideo'))  {
-		if (_nc.data('forcecover')==1) {
+	if (_nc.data('forcecover')==1 || _nc.hasClass('fullscreenvideo') || _nc.data('bgvideo')==1)  {
+		if (_nc.data('forcecover')==1 || _nc.data('bgvideo')==1) {
 			html5vid.addClass("fullcoveredvideo");	
-			var asprat = _nc.data('aspectratio');				
+			var asprat = _nc.data('aspectratio') || "4:3";				
 			_R.prepareCoveredVideo(asprat,opt,_nc);
 		}
 		else
 			html5vid.addClass("fullscreenvideo");				
 	}
-
+	
 
 	// FIND CONTROL BUTTONS IN VIDEO, AND ADD EVENT LISTENERS ON THEM
 	var playButton = _nc.find('.tp-vid-play-pause')[0],

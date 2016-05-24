@@ -1,11 +1,4 @@
 <?php
-/**
- * The Header for our theme.
- *
- * Displays all of the <head> section and everything up till <div id="main">
- *
- * @package _tk
- */
 ?><!DOCTYPE html>
 <html itemscope="itemscope" itemtype="http://schema.org/Webpage" <?php language_attributes(); ?>>
 <head>
@@ -21,7 +14,6 @@
 	<?php wp_head(); ?>
   <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,700' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Radley:400,400italic' rel='stylesheet' type='text/css'>
 </head>
 
 <body <?php body_class(); ?>>
@@ -38,8 +30,8 @@
       						<div class="inner-header clearfix">
       							<div class="left-header">
                       <i class="fa fa-map-marker" aria-hidden="true"></i> Bredabaan 58  2990 Wuustwezel
-                      <i class="fa fa-phone" aria-hidden="true"></i> +32(0)476 49 79 30
-                      <i class="fa fa-envelope-o" aria-hidden="true"></i> feestzaaldegrens@promis-events.be
+                      <i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:+32476497930">+32(0)476 49 79 30</a>
+                      <i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:feestzaaldegrens@promis-events.be">feestzaaldegrens@promis-events.be</a>
                     </div>
       							<div class="right-header">
       								<div class="social">
@@ -56,12 +48,6 @@
       							</div>
       							<div class="header-right-toggle pull-right">
       								<a href="javascript:void(0)" class="side-menu-button"><i class="fa fa-bars"></i></a>
-      							</div>
-      							<div class="search-menu-button pull-right hidden-sm hidden-xs">
-      								<a href="javascript:void(0)" class="search-link"><i class="fa fa-search"></i></a>
-      								<div class="search-wrap">
-      								<?php get_search_form(); ?>
-      								</div>
       							</div>
       							<nav class="main-navigation pull-right hidden-xs hidden-sm">
                       <!-- The WordPress Menu goes here -->

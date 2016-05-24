@@ -6,22 +6,24 @@
  ?>
 
  <?php get_header(); ?>
- <section class="call-to-action">
-   <div class="container">
-     <div class="row">
-       <div class="col-sm-12">
-         <div class="cta-inner clearfix">
-           <div class="cta-text">
-             <h5 class="cta-title">Stig zal hier zotte slagzinnen zetten en mensen zullen reservern!</h5>
-           </div>
-           <div class="cta-button">
-             <a href="#" class="btn btn-bordered">Hier is het te doen!</a>
+ <?php if(get_field('link') && get_field('cta_description') && get_field('knoptekst')) :?>
+       <section class="call-to-action">
+         <div class="container">
+           <div class="row">
+             <div class="col-sm-12">
+               <div class="cta-inner clearfix">
+                 <div class="cta-text">
+                   <h5 class="cta-title"><?php the_field('cta_description') ?></h5>
+                 </div>
+                 <div class="cta-button">
+                   <a href="<?php the_field('link') ?>" class="btn btn-bordered"><?php the_field('knoptekst') ?></a>
+                 </div>
+               </div>
+             </div>
            </div>
          </div>
-       </div>
-     </div>
-   </div>
- </section>
+       </section>
+     <?php endif; ?>
  				<section class="projects">
  					<div class="container">
  						<div class="row section-header">

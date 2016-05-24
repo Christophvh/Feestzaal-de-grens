@@ -72,13 +72,13 @@ class RevSliderTemplate {
 							//return $file so it can be processed. We have now downloaded it into a zip file
 							return $file;
 						}else{//else, print that file could not be written
-							return array('error' => __('Can\'t write the file into the uploads folder of WordPress, please change permissions and try again!', REVSLIDER_TEXTDOMAIN));
+							return array('error' => __('Can\'t write the file into the uploads folder of WordPress, please change permissions and try again!', 'revslider'));
 						}
 					}
 				}
 			}//else, check for error and print it to customer
 		}else{
-			return array('error' => __('Can\'t write into the uploads folder of WordPress, please change permissions and try again!', REVSLIDER_TEXTDOMAIN));
+			return array('error' => __('Can\'t write into the uploads folder of WordPress, please change permissions and try again!', 'revslider'));
 		}
 		
 		return false;
@@ -616,12 +616,27 @@ class RevSliderTemplate {
 		if($template['img'] == ''){
 			//set default image
 		}
+		
+		//check for version and compare, only allow download if version is high enough
+		$deny = '';
+		if(isset($template['required'])){
+			if(version_compare(RevSliderGlobals::SLIDER_REVISION, $template['required'], '<')){
+				$deny = ' deny_download';
+			}
+		}
 		?>
-		<div data-src="<?php echo $template['img']; ?>" class="template_slider_item_import"
+		<div data-src="<?php echo $template['img']; ?>" class="template_slider_item_import<?php echo $deny; ?>"
 			data-gridwidth="<?php echo $template['width']; ?>"
 			data-gridheight="<?php echo $template['height']; ?>"
 			data-zipname="<?php echo $template['zip']; ?>"
 			data-uid="<?php echo $template['uid']; ?>"
+			<?php
+			if($deny !== ''){ //add needed version number here
+				?>
+				data-versionneed="<?php echo $template['required']; ?>"
+				<?php
+			}
+			?>
 			>
 			<!--div class="template_title"><?php echo (isset($template['title'])) ? $template['title'] : ''; ?></div-->
 			<div class="not-imported-overlay"></div>
@@ -650,16 +665,30 @@ class RevSliderTemplate {
 		if($template['img'] == ''){
 			//set default image
 		}
+		//check for version and compare, only allow download if version is high enough
+		$deny = '';
+		if(isset($template['required'])){
+			if(version_compare(RevSliderGlobals::SLIDER_REVISION, $template['required'], '<')){
+				$deny = ' deny_download';
+			}
+		}
 		
 		?>
 		<div class="template_slide_item_import">
-			<div class="template_slide_item_img" 
+			<div class="template_slide_item_img<?php echo $deny; ?>" 
 				data-src="<?php echo $template['img']; ?>" 
 				data-gridwidth="<?php echo $template['width']; ?>"
 				data-gridheight="<?php echo $template['height']; ?>"
 				data-zipname="<?php echo $template['zip']; ?>"
 				data-uid="<?php echo $template['uid']; ?>"
 				data-slidenumber="<?php echo $template['number']; ?>"
+				<?php
+				if($deny !== ''){ //add needed version number here
+					?>
+					data-versionneed="<?php echo $template['required']; ?>"
+					<?php
+				}
+				?>
 			>
 				<div class="not-imported-overlay"></div>
 			</div>

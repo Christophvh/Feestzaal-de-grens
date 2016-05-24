@@ -1,6 +1,6 @@
 /********************************************
  * REVOLUTION 5.0 EXTENSION - LAYER ANIMATION
- * @version: 1.1.2 (16.09.2015)
+ * @version: 1.1.5 (23.10.2015)
  * @requires jquery.themepunch.revolution.js
  * @author ThemePunch
 *********************************************/
@@ -169,8 +169,10 @@ jQuery.extend(true,_R, {
 
 			
 		var handlecaption=0,
-			layervisible =  makeArray(_nc.data('visibility'),opt)[opt.curWinRange] || makeArray(_nc.data('visibility'),opt) || "on";
+			layervisible =  makeArray(_nc.data('visibility'),opt)[opt.forcedWinRange] || makeArray(_nc.data('visibility'),opt) || "on";
 		
+		
+
 		// HIDE CAPTION IF RESOLUTION IS TOO LOW			
 		if (layervisible=="off" || (_gw<opt.hideCaptionAtLimit && _nc.data('captionhidden')=="on") || (_gw<opt.hideAllCaptionAtLimit)) 
 			_nc.addClass("tp-hidden-caption");											
@@ -540,8 +542,7 @@ jQuery.extend(true,_R, {
 				if (hashover) {
 
 					$hover = getAnimDatas($hover,_nc.data('transform_hover'));
-					$hover = convertHoverStyle($hover,_nc.data('style_hover'));
-
+					$hover = convertHoverStyle($hover,_nc.data('style_hover'));					
 					_nc.data('hover',$hover);
 				}
 			
@@ -562,9 +563,10 @@ jQuery.extend(true,_R, {
 					 		
 					 	if (intl && intl.progress()==1) {						 		
 
-						 	if (nc.data('newhoveranim')===undefined || 	nc.data('newhoveranim')==="none")						 		
+						 	if (nc.data('newhoveranim')===undefined || 	nc.data('newhoveranim')==="none")	{						 		
 						 		nc.data('newhoveranim',punchgs.TweenLite.to(nc,t.speed,t.anim));						 	
-						 	else {						 		
+
+						 	} else {						 		
 						 		nc.data('newhoveranim').progress(0);
 						 		nc.data('newhoveranim').play();
 						 	}
