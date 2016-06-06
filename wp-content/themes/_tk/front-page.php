@@ -130,7 +130,14 @@
                     <?php edit_post_link( __( 'Edit', '_tk' ), '<span class="edit-link">', '</span>' ); ?>
               </div>
               <div class="col-sm-6">
-                Afbeelding met nog een inschrijvingsveld
+                <?php
+                  $image = get_field('troeven_foto');
+
+                  if( !empty($image) ): ?>
+
+                    <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
+
+                  <?php endif; ?>
               </div>
               <div class="spacer"></div>
             </div>
@@ -328,11 +335,62 @@
             <div class="col-md-7 col-sm-7">
               <p>
               <?php the_field('korte_tekst'); ?>
-              <div class="star-ratings-css">
-                <div class="star-ratings-css-top" style="width: <?php the_field('rating')?>%"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-                <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-              </div>
               </p>
+
+              <?php $rating = get_field('rating') ?>
+
+              <div class="review-stars" itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating">
+      					<div class="wporg-ratings" title="<?= $rating ?> out of 5 stars" style="color:#d2a508;">
+                <?php switch ($rating) {
+                          case 1:
+                              echo '<span class="dashicons dashicons-star-filled"></span>
+                                    <span class="dashicons dashicons-star-empty"></span>
+                                    <span class="dashicons dashicons-star-empty"></span>
+                                    <span class="dashicons dashicons-star-empty"></span>
+                                    <span class="dashicons dashicons-star-empty"></span>';
+                              break;
+                          case 2:
+                              echo '<span class="dashicons dashicons-star-filled"></span>
+                                    <span class="dashicons dashicons-star-filled"></span>
+                                    <span class="dashicons dashicons-star-empty"></span>
+                                    <span class="dashicons dashicons-star-empty"></span>
+                                    <span class="dashicons dashicons-star-empty"></span>';
+                              break;
+                          case 3:
+                              echo '<span class="dashicons dashicons-star-filled"></span>
+                                    <span class="dashicons dashicons-star-filled"></span>
+                                    <span class="dashicons dashicons-star-filled"></span>
+                                    <span class="dashicons dashicons-star-empty"></span>
+                                    <span class="dashicons dashicons-star-empty"></span>';
+                              break;
+                          case 4:
+                              echo '<span class="dashicons dashicons-star-filled"></span>
+                                    <span class="dashicons dashicons-star-filled"></span>
+                                    <span class="dashicons dashicons-star-filled"></span>
+                                    <span class="dashicons dashicons-star-filled"></span>
+                                    <span class="dashicons dashicons-star-empty"></span>';
+                              break;
+                          case 5:
+                              echo '<span class="dashicons dashicons-star-filled"></span>
+                                    <span class="dashicons dashicons-star-filled"></span>
+                                    <span class="dashicons dashicons-star-filled"></span>
+                                    <span class="dashicons dashicons-star-filled"></span>
+                                    <span class="dashicons dashicons-star-filled"></span>';
+                              break;
+                           default:
+                           echo '<span class="dashicons dashicons-star-filled"></span>
+                                 <span class="dashicons dashicons-star-filled"></span>
+                                 <span class="dashicons dashicons-star-filled"></span>
+                                 <span class="dashicons dashicons-star-filled"></span>
+                                 <span class="dashicons dashicons-star-filled"></span>';
+                                 break;
+                      } ?>
+
+                </div>
+                <meta itemprop="worstRating" content="1">
+      					<meta itemprop="ratingValue" content="4">
+      					<meta itemprop="bestRating" content="5">
+							</div>
 
               <div class="spacer"></div>
             </div>
@@ -345,32 +403,36 @@
           <div class="row section-header">
             <div class="col-sm-12 text-center">
               <h3>Pakketten aangepast aan uw wensen</h3>
+              <p>
+                Alle prijzen zijn exclusief BTW en aan te passen aan uw specifieke verlangens
+              </p>
             </div>
           </div>
           <div class="row">
                <div class="col-md-3 col-sm-6 col-xs-12 float-shadow">
                    <div class="price_table_container">
-                       <div class="price_table_heading">Starter</div>
+                       <div class="price_table_heading">Standaard</div>
                        <div class="price_table_body">
-                           <div class="price_table_row cost warning-text"><strong>€ 10</strong></div>
-                           <div class="price_table_row">Eten</div>
-                           <div class="price_table_row">Drinken</div>
-                           <div class="price_table_row">Iets op maat</div>
-                           <div class="price_table_row">Nog iets</div>
+                           <div class="price_table_row cost warning-text"><strong>vanaf €200</strong></div>
+                           <div class="price_table_row">Zaalverhuur onder 100 personen €400</div>
+                           <div class="price_table_row">Zaalverhuur meer dan 100 personen €200</div>
+                           <div class="price_table_row">Alles staat klaar voor gebruik. Geen kopzorgen</div>
+                           <div class="price_table_row">Geluid/licht/personeel + Sabam inclusief</div>
                        </div>
-                       <a href="/controleer-beschikbaarheid/" class="btn btn-warning btn-lg btn-block">Controleer Beschikbaarheid</a>
+                       <a href="/controleer-beschikbaarheid/" class="btn btn-warning btn-lg btn-block">Inclusief voor elk feest</a>
                    </div>
                </div>
 
                <div class="col-md-3 col-sm-6 col-xs-12 float-shadow">
                    <div class="price_table_container">
-                       <div class="price_table_heading">Basic</div>
+                       <div class="price_table_heading">'Basispakket drank'</div>
                        <div class="price_table_body">
-                           <div class="price_table_row cost primary-text"><strong>€ 29</strong></div>
-                           <div class="price_table_row">Eten</div>
-                           <div class="price_table_row">Drinken</div>
-                           <div class="price_table_row">Iets op maat</div>
-                           <div class="price_table_row">Nog iets</div>
+                           <div class="price_table_row cost primary-text"><strong>€ 32,90/p.p</strong></div>
+                           <div class="price_table_row">Standaardpakket</div>
+                           <div class="price_table_row">Bier</div>
+                           <div class="price_table_row">Frisdrank</div>
+                           <div class="price_table_row">Assortiment wijnen</div>
+                           <div class="price_table_row">Glas cava bij binnenkomst</div>
                        </div>
                        <a href="/controleer-beschikbaarheid/" class="btn btn-primary btn-lg btn-block">Controleer Beschikbaarheid</a>
                    </div>
@@ -379,13 +441,14 @@
                <div class="col-md-3 col-sm-6 col-xs-12 float-shadow">
                  <div class="recommended"><strong><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Meest Populair!</strong></div>
                    <div class="price_table_container">
-                       <div class="price_table_heading">Premium</div>
+                       <div class="price_table_heading">'Kleine honger'</div>
                        <div class="price_table_body">
-                           <div class="price_table_row cost success-bg"><strong>€ 39</strong></div>
-                           <div class="price_table_row">Eten</div>
-                           <div class="price_table_row">Drinken</div>
-                           <div class="price_table_row">Iets op maat</div>
-                           <div class="price_table_row">Nog iets</div>
+                           <div class="price_table_row cost success-bg"><strong>€ 36,50/p.p</strong></div>
+                           <div class="price_table_row">Standaardpakket</div>
+                           <div class="price_table_row">Basispakket drank</div>
+                           <div class="price_table_row">Olijven op tafel</div>
+                           <div class="price_table_row">Buggles met geitenkaas</div>
+                           <div class="price_table_row">Frituurhapjes</div>
                        </div>
                        <a href="/controleer-beschikbaarheid/" class="btn btn-success btn-lg btn-block">Controleer Beschikbaarheid</a>
                    </div>
@@ -393,13 +456,16 @@
 
                <div class="col-md-3 col-sm-6 col-xs-12 float-shadow">
                    <div class="price_table_container">
-                       <div class="price_table_heading">Master</div>
-                        <div class="price_table_row cost success-bg"><strong>€ 39</strong></div>
+                       <div class="price_table_heading">'De Grens'</div>
+                        <div class="price_table_row cost info-text"><strong>€ 39,90/p.p</strong></div>
                        <div class="price_table_body">
-                         <div class="price_table_row">Eten</div>
-                         <div class="price_table_row">Drinken</div>
-                         <div class="price_table_row">Iets op maat</div>
-                         <div class="price_table_row">Nog iets</div>
+                         <div class="price_table_row">Standaardpakket</div>
+                         <div class="price_table_row">Basispakket drank</div>
+                         <div class="price_table_row">Borrel-, Frituur-, Ovenhapjes</div>
+                         <div class="price_table_row">Zakje friet met saus naar keuze</div>
+                         <div class="price_table_row">Olijven op tafel</div>
+                         <div class="price_table_row">Toastjes</div>
+                         <div class="price_table_row">Tomaat Mozarella</div>
                        </div>
                        <a href="/controleer-beschikbaarheid/" class="btn btn-info btn-lg btn-block">Controleer Beschikbaarheid</a>
                    </div>
