@@ -52,51 +52,5 @@
    </div>
  </section>
 
- <section>
-   <div class="container">
-     <div class="row section-header">
-       <div class="col-sm-12 text-center">
-         <h3>Het Team</h3>
-       </div>
-     </div>
-     <div class="row">
-       <?php
-           $args = array (
-           'post_type' => 'teamleden',
-           'post_status' => 'publish',
-         );
-           $the_query = new WP_Query( $args ); ?>
-      <?php if ( $the_query->have_posts() ) : ?>
-      <?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
-       <div class="col-md-4 col-sm-6">
-         <div class="team-item">
-           <div class="team-thumb">
-             <?php if ( has_post_thumbnail() ): ?>
-             <?php the_post_thumbnail('teamleden'); ?>
-             <?php endif; ?>
-             <div class="hover">
-               <a href="<?php the_field('facebook'); ?>"><i class="fa fa-facebook"></i></a>
-               <a href="<?php the_field('linkedin'); ?>"><i class="fa fa-linkedin"></i></a>
-             </div>
-             <div class="overlay"></div>
-           </div>
-           <div class="team-content">
-             <span class="role"><?php the_field('functie'); ?></span>
-             <h5><?php the_title(); ?></h5>
-             <p><?php the_content(); ?></p>
-           </div>
-         </div>
-       </div>
-     <?php endwhile; ?>
-     <!-- end of the loop -->
-     <!-- pagination here -->
-     <?php wp_reset_postdata(); ?>
 
-   <?php else : ?>
-     <p><?php _e( 'Sorry, geen teamleden gevonden.' ); ?></p>
-   <?php endif; ?>
-     </div>
-   </div>
- </section>
-
- <?php get_footer(); ?>
+ <?php get_footer(); 

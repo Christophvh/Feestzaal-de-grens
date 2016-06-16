@@ -257,60 +257,6 @@
         </div>
       </section>
 
-      <section class="full-width" style="background-color: #f2f2f2;">
-        <div class="container">
-          <div class="row section-header">
-            <div class="col-sm-12 text-center">
-              <h3>Het Team</h3>
-            </div>
-          </div>
-          <div class="row">
-            <?php
-                $args = array (
-                'post_type'       => 'teamleden',
-                'post_status'     => 'publish',
-                'posts_per_page'  => '3'
-              );
-                $the_query = new WP_Query( $args ); ?>
-           <?php if ( $the_query->have_posts() ) : ?>
-           <?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
-            <div class="col-md-4 col-sm-6">
-              <div class="team-item">
-                <div class="team-thumb">
-                  <?php if ( has_post_thumbnail() ): ?>
-                  <?php the_post_thumbnail('teamleden'); ?>
-                  <?php endif; ?>
-                  <div class="hover">
-                    <a href="<?php the_field('facebook'); ?>"><i class="fa fa-facebook"></i></a>
-                    <a href="<?php the_field('linkedin'); ?>"><i class="fa fa-linkedin"></i></a>
-                  </div>
-                  <div class="overlay"></div>
-                </div>
-                <div class="team-content">
-                  <span class="role"><?php the_field('functie'); ?></span>
-                  <h5><?php the_title(); ?></h5>
-                  <p><?php the_content(); ?></p>
-                  <p><?php edit_post_link( __( 'Edit', '_tk' ), '<span class="edit-link">', '</span>' ); ?></p>
-                </div>
-              </div>
-            </div>
-          <?php endwhile; ?>
-          <!-- end of the loop -->
-          <!-- pagination here -->
-          <?php wp_reset_postdata(); ?>
-
-        <?php else : ?>
-          <p><?php _e( 'Sorry, geen teamleden gevonden.' ); ?></p>
-        <?php endif; ?>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12 text-center">
-            <a href="/over-ons" class="btn btn-accent">Bekijk het volledige team</a>
-          </div>
-        </div>
-      </section>
-
       <section class="services">
         <div class="container">
           <div class="row section-header">
@@ -339,8 +285,8 @@
 
               <?php $rating = get_field('rating') ?>
 
-              <div class="review-stars" itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating">
-      					<div class="wporg-ratings" title="<?= $rating ?> out of 5 stars" style="color:#d2a508;">
+              <div class="stars" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+      					<div class="ratings" title="<?= $rating ?> out of 5 stars" style="color:#d2a508;">
                 <?php switch ($rating) {
                           case 1:
                               echo '<span class="dashicons dashicons-star-filled"></span>
@@ -414,12 +360,7 @@
                        <div class="price_table_heading">Standaard</div>
                        <div class="price_table_body">
                            <div class="price_table_row cost warning-text"><strong>vanaf €200</strong></div>
-                           <div class="price_table_row">Zaalverhuur onder 100 personen €400</div>
-                           <div class="price_table_row">Zaalverhuur meer dan 100 personen €200</div>
-                           <div class="price_table_row">Alles staat klaar voor gebruik. Geen kopzorgen</div>
-                           <div class="price_table_row">Geluid/licht/personeel + Sabam inclusief</div>
                        </div>
-                       <a href="/controleer-beschikbaarheid/" class="btn btn-warning btn-lg btn-block">Inclusief voor elk feest</a>
                    </div>
                </div>
 
@@ -428,13 +369,7 @@
                        <div class="price_table_heading">'Basispakket drank'</div>
                        <div class="price_table_body">
                            <div class="price_table_row cost primary-text"><strong>€ 32,90/p.p</strong></div>
-                           <div class="price_table_row">Standaardpakket</div>
-                           <div class="price_table_row">Bier</div>
-                           <div class="price_table_row">Frisdrank</div>
-                           <div class="price_table_row">Assortiment wijnen</div>
-                           <div class="price_table_row">Glas cava bij binnenkomst</div>
                        </div>
-                       <a href="/controleer-beschikbaarheid/" class="btn btn-primary btn-lg btn-block">Controleer Beschikbaarheid</a>
                    </div>
                </div>
 
@@ -444,13 +379,7 @@
                        <div class="price_table_heading">'Kleine honger'</div>
                        <div class="price_table_body">
                            <div class="price_table_row cost success-bg"><strong>€ 36,50/p.p</strong></div>
-                           <div class="price_table_row">Standaardpakket</div>
-                           <div class="price_table_row">Basispakket drank</div>
-                           <div class="price_table_row">Olijven op tafel</div>
-                           <div class="price_table_row">Buggles met geitenkaas</div>
-                           <div class="price_table_row">Frituurhapjes</div>
                        </div>
-                       <a href="/controleer-beschikbaarheid/" class="btn btn-success btn-lg btn-block">Controleer Beschikbaarheid</a>
                    </div>
                </div>
 
@@ -458,20 +387,14 @@
                    <div class="price_table_container">
                        <div class="price_table_heading">'De Grens'</div>
                         <div class="price_table_row cost info-text"><strong>€ 39,90/p.p</strong></div>
-                       <div class="price_table_body">
-                         <div class="price_table_row">Standaardpakket</div>
-                         <div class="price_table_row">Basispakket drank</div>
-                         <div class="price_table_row">Borrel-, Frituur-, Ovenhapjes</div>
-                         <div class="price_table_row">Zakje friet met saus naar keuze</div>
-                         <div class="price_table_row">Olijven op tafel</div>
-                         <div class="price_table_row">Toastjes</div>
-                         <div class="price_table_row">Tomaat Mozarella</div>
-                       </div>
-                       <a href="/controleer-beschikbaarheid/" class="btn btn-info btn-lg btn-block">Controleer Beschikbaarheid</a>
                    </div>
                </div>
            </div>
+           <div class="row text-center">
+            <a href="/prijzen" class="btn btn-accent">Bekijk alle pakketten</a>
+           </div>
        </div>
      </section>
+
 
 <?php get_footer() ?>

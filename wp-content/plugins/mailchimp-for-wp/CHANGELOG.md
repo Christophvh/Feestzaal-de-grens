@@ -1,6 +1,56 @@
 Changelog
 =========
 
+#### 3.1.9 - June 7, 2016
+
+**Fixes**
+
+- Placeholder polyfill wasn't loaded (only in IE8 and below).
+
+**Improvements**
+
+- Don't write to debug log if it is not writable.
+- Reset some CSS properties for commonly used class names in Form Editor & Debug Log.
+- Do not unnecessarily register styles which are then immediately enqueued.
+
+**Additions**
+
+- Add "is required field" option for dropdown & radio fields in Field Helper.
+- Link to [Boxzilla plugin](https://boxzillaplugin.com/) from admin sidebar.
+
+
+#### 3.1.8 - May 23, 2016
+
+**Fixes**
+
+- Form Preview mode replaced all titles on that page with "Form Preview".
+- API class fix for [eCommerce360 functionality](https://mc4wp.com/kb/what-is-ecommerce360/).
+
+**Improvements**
+
+- Show dismissible notice when API key is not set.
+- Show empty API key errors in plugin log.
+- Friendlier error message for re-subscribe failures.
+
+**Additions**
+
+- Add `form.reset()` method to JS API.
+
+#### 3.1.7 - May 9, 2016
+
+**Fixes**
+
+- Shortcode wasn't accepting `element_id` as a valid attribute.
+- Take array style fields into account when checking if a form contains a given field.
+
+
+**Improvements**
+
+- Nested fields will now be properly validated when they're marked as required.
+- If plugin is installed using Composer, autoloader won't be loaded (again).
+
+
+
 #### 3.1.6 - April 12, 2016
 
 **Fixes**
